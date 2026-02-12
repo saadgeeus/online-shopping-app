@@ -31,15 +31,12 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image with dual tags...
-      # Aik hi image ko do tags dena: Aik versioned aur aik latest
-      - docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:$VERSION_TAG .
+      - docker build -t $IMAGE_NAME:$VERSION_TAG .
 
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing images to Docker Hub...
-      # Dono tags push karna zaroori hai
-      - docker push $IMAGE_NAME:latest
       - docker push $IMAGE_NAME:$VERSION_TAG
       
       - echo Packaging application for Deployment...
