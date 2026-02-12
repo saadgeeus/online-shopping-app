@@ -9,52 +9,52 @@ env:
 phases:
   install:
     runtime-versions:
-      nodejs: 18 # Node 12 bohot purana hai, modern apps ke liye 18+ behtar hai
+      nodejs: 18
     commands:
       - echo Installing dependencies...
       - npm install
 
   pre_build:
     commands:
-      - echo Logging in to Docker Registry...
+      - echo Logging in to Docker Hub...
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin
+      
+      # Variables Setup
       - IMAGE_REPO_NAME="app-online-shop"
       - IMAGE_NAME="$DOCKER_REGISTRY_USERNAME/$IMAGE_REPO_NAME"
       
-      # Versioning Logic: Build ID ka chota hissa aur timestamp use karein
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - BUILD_TAG=${COMMIT_HASH:=build-$(date +%Y%m%d%H%M%S)}
-      - echo "Setting Image Tag to $BUILD_TAG"
+      # Versioning Logic (v1, v2, v3...)
+      - VERSION_TAG="v$CODEBUILD_BUILD_NUMBER"
+      - echo "Current Version Tag is $VERSION_TAG"
 
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image with tags...
-      # Do tags banayein: ek unique version aur ek 'latest'
-      - docker build -t $IMAGE_NAME:$BUILD_TAG .
-      - docker tag $IMAGE_NAME:$BUILD_TAG $IMAGE_NAME:latest
+      - echo Building the Docker image with dual tags...
+      # Aik hi image ko do tags dena: Aik versioned aur aik latest
+      - docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:$VERSION_TAG .
 
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing the Docker images to Docker Hub...
-      # Dono tags push karein
-      - docker push $IMAGE_NAME:$BUILD_TAG
+      - echo Pushing images to Docker Hub...
+      # Dono tags push karna zaroori hai
       - docker push $IMAGE_NAME:latest
+      - docker push $IMAGE_NAME:$VERSION_TAG
       
-      - echo Packaging application for S3...
+      - echo Packaging application for Deployment...
       - zip -r online-shop-app.zip * .[^.]* -x "node_modules/*" ".git/*"
       - aws s3 cp online-shop-app.zip s3://aws-s3-bucket-ci-cd/online-shop-app/
       
       - echo Writing image definitions file...
-      # Sahi Version tag ke sath definitions file banayein
-      - printf '[{"name":"online-shop-container","imageUri":"%s"}]' $IMAGE_NAME:$BUILD_TAG > imagedefinitions.json
+      # Image URI mein Versioned Tag use karein taake track rahay
+      - printf '[{"name":"online-shop-container","imageUri":"%s"}]' $IMAGE_NAME:$VERSION_TAG > imagedefinitions.json
       - cat imagedefinitions.json
 
 artifacts:
   files:
-    - '**/*'
-    - imagedefinitions.json
-  exclude-patterns:
-    - 'node_modules/**/*'
-    - '.git/**/*'
+    - '**/*-app.zip'
+    - 'imagedefinitions.json'
+    - 'appspec.yml'
+    - 'scripts/**/*'
+  discard-paths: no
