@@ -10,7 +10,7 @@ export function Footer() {
                 <Row className="gy-2">
                     <Col md={3}>
                         <div className="footer-brand mb-3">
-                            <a href="https://github.com/LondheShubham153/online_shop_hackathon" 
+                            <a href="https://github.com/saadgeeus/online-shopping-app" 
                                className="brand-link d-inline-flex align-items-center"
                             >
                                 <img src="/imgs/logo.svg" alt="Logo" width="30" height="30" className="me-2" />
@@ -37,15 +37,15 @@ export function Footer() {
                         <div className="quick-links-group">
                             <div className="quick-link-item">
                                 <FontAwesomeIcon icon={faLink} className="contact-icon me-2" />
-                                <a href="https://trainwithshubham.com" className="footer-link">Privacy Policy</a>
+                                <a href="#" className="footer-link">Privacy Policy</a>
                             </div>
                             <div className="quick-link-item">
                                 <FontAwesomeIcon icon={faLink} className="contact-icon me-2" />
-                                <a href="https://trainwithshubham.com" className="footer-link">Terms & Conditions</a>
+                                <a href="#" className="footer-link">Terms & Conditions</a>
                             </div>
                             <div className="quick-link-item">
                                 <FontAwesomeIcon icon={faLink} className="contact-icon me-2" />
-                                <a href="https://trainwithshubham.com" className="footer-link">Return Policy</a>
+                                <a href="#" className="footer-link">Return Policy</a>
                             </div>
                         </div>
                     </Col>
@@ -55,15 +55,15 @@ export function Footer() {
                         <div className="quick-links-group">
                             <div className="quick-link-item">
                                 <FontAwesomeIcon icon={faLink} className="contact-icon me-2" />
-                                <a href="https://trainwithshubham.com" className="footer-link">Shipping Info</a>
+                                <a href="#" className="footer-link">Shipping Info</a>
                             </div>
                             <div className="quick-link-item">
                                 <FontAwesomeIcon icon={faLink} className="contact-icon me-2" />
-                                <a href="https://trainwithshubham.com" className="footer-link">FAQ</a>
+                                <a href="#" className="footer-link">FAQ</a>
                             </div>
                             <div className="quick-link-item">
                                 <FontAwesomeIcon icon={faLink} className="contact-icon me-2" />
-                                <a href="https://trainwithshubham.com" className="footer-link">Support</a>
+                                <a href="#" className="footer-link">Support</a>
                             </div>
                         </div>
                     </Col>
@@ -76,7 +76,7 @@ export function Footer() {
                             </h5>
                             <div className="social-links-horizontal">
                                 <a 
-                                    href="https://github.com/LondheShubham153" 
+                                    href="https://github.com/saadgeeus" 
                                     target="_blank" 
                                     rel="noopener noreferrer" 
                                     className="social-link"
@@ -84,7 +84,7 @@ export function Footer() {
                                     <FontAwesomeIcon icon={faGithub} />
                                 </a>
                                 <a 
-                                    href="https://linkedin.com/in/shubhamlondhe1996" 
+                                    href="www.linkedin.com/in/saad-mehmood-0a0b42268" 
                                     target="_blank" 
                                     rel="noopener noreferrer" 
                                     className="social-link"
@@ -92,7 +92,7 @@ export function Footer() {
                                     <FontAwesomeIcon icon={faLinkedin} />
                                 </a>
                                 <a 
-                                    href="https://twitter.com/trainwitshubham" 
+                                    href="#" 
                                     target="_blank" 
                                     rel="noopener noreferrer" 
                                     className="social-link"
@@ -115,7 +115,7 @@ export function Footer() {
                         All rights reserved.
                     </div>
                     <div className="mt-1">
-                    Driven for TrainWithShubham Community.
+                    Driven for DevOps Community.
                     </div>
                 </div>
             </Container>
