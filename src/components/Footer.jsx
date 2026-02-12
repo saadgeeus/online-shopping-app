@@ -84,7 +84,7 @@ export function Footer() {
                                     <FontAwesomeIcon icon={faGithub} />
                                 </a>
                                 <a 
-                                    href="www.linkedin.com/in/saad-mehmood-0a0b42268" 
+                                    href="https://linkedin.com/in/saad-mehmood-0a0b42268" 
                                     target="_blank" 
                                     rel="noopener noreferrer" 
                                     className="social-link"
