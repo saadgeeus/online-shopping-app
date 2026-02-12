@@ -38,6 +38,9 @@ phases:
       - echo Build completed on `date`
       - echo Pushing images to Docker Hub...
       - docker push $IMAGE_NAME:$VERSION_TAG
+
+      # VERSION_TAG ko scripts folder mein save karein taake EC2 ko pata chal sakay
+      - echo "VERSION_TAG=$VERSION_TAG" > scripts/version.env
       
       - echo Packaging application for Deployment...
       - zip -r online-shop-app.zip * .[^.]* -x "node_modules/*" ".git/*"
